@@ -23,4 +23,4 @@ sleep 1
 fi
 j=$(expr $j + 1)
 done
-cowsay -T \U meuh
+cowsay -T "U " meuh

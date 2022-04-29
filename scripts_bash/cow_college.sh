@@ -17,4 +17,4 @@ un2=$un1
 un1=$u
 u=$(expr $un1 + $un2)
 done
-cowsay -T \U meuh
+cowsay -T "U " meuh

@@ -4,4 +4,4 @@ do
 cowsay $(expr $i \* $i)
 sleep 1
 done
-cowsay -T \U meuh
+cowsay -T "U " meuh
