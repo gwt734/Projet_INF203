@@ -10,36 +10,46 @@
 int fitness = 5;
 int stock = 5;
 
-void affiche_vache(int etat){
+void affiche_vache(int etat, int dureedevie){
     /* Déclaration des yeux et de la langue */
     char yeux[3];
     char langue[2];
 
+    /* On crée la vache de base qui "prend en paramètre" les yeux et la langue*/
+    char vache[1000] = "          ^ __ ^\n           (%s)\\_______\n           (__)\\       )\\/\\\n   O         %s ||----w |\n  \\|/          ||     ||             \\|/\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n";
+    
     /* Dépendamment de l'état actuel on modifie les yeux et la langue*/
     switch (etat)
     {
     case byebyelife:
-        strcpy(yeux,"XX\0");
-        strcpy(langue,"U\0");
+        if (dureedevie < 10)
+        {
+            strcpy(vache," _____________\n |    RIP    | - __ -_______\n |   Vache   |  (XX)_\\       )\\/\\\n |  0%d jours |  (__)==\\----w/===\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^\n");
+            printf(vache, dureedevie);
+        }
+        else if (dureedevie < 100)
+        {
+            strcpy(vache," _____________\n |    RIP    | - __ -_______\n |   Vache   |  (XX)_\\       )\\/\\\n |  %d jours |  (__)==\\----w/===\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^\n");
+            printf(vache, dureedevie);
+        }
+        else
+        {
+            strcpy(vache," _____________\n |    RIP    | - __ -_______\n |   Vache   |  (XX)_\\       )\\/\\\n | Trop agée |  (__)==\\----w/===\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+            printf(vache);
+        }
         break;
     case lifesucks:
-        strcpy(yeux,"--\0");
-        strcpy(langue," \0");
+        strcpy(vache,"          ^ __ ^\n           (--)\\_______\n           (__)\\       )\\/\\\n   O           ||----w |\n  \\|/          ||     ||             \\|/\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+        printf(vache);
         break;
     case liferocks:
-        strcpy(yeux,"OO\0");
-        strcpy(langue," \0");
+        strcpy(vache,"           ^ __ ^\n            (OO)\n           ~(o_)\\\n           \\\\//  \\\n            ~  \\  \\/\\/\n                ||\n                ||\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+        printf(vache);
         break;
     }
-
-    /* On crée la vache de base qui "prend en paramètre" les yeux et la langue*/
-    char vache[1000] = "          ^ __ ^\n           (%s)\\_______\n           (__)\\       )\\/\\\n   O         %s ||----w |\n  \\|/          ||     ||             \\|/\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n";
-    
-    /* On affiche la vache avec les yeux et la langue modifiés */
-    printf(vache, yeux, langue);
 }
 
-void update_stock(int lunchfood){
+void stock_update(int lunchfood){
     /* On initialise le generateur de nombres aleatoires */
     time_t t ;
     srand (( unsigned ) time (& t ) ) ;
@@ -57,7 +67,7 @@ void update_stock(int lunchfood){
     }
 }
 
-void update_fitness(int lunchfood){
+void fitness_update(int lunchfood){
     /* On initialise le generateur de nombres aleatoires */
     time_t t ;
     t = t + 12232;
@@ -86,7 +96,7 @@ int main(){
     while (etat != byebyelife)
     {
         /*affiche l'état courant de la vache en la dessinant*/
-        affiche_vache(etat);
+        affiche_vache(etat, dureedevie);
 
         /*On affiche le stock restant et on demande de rentrer
         une valeur de lunchfood qui doit être compris entre le stock et 0 compris*/ 
@@ -101,8 +111,8 @@ int main(){
         /* On met à jour les valeurs du stock et du fitness et selon 
         la valeur du fitness la vache change d'état et nous refaisons cette boucle 
         tant que la vache ne soit pas dans l'état byebyelife et si ce n'est pas le cas, on ajoute un à la durée de vie*/
-        update_stock(lunchfood);
-        update_fitness(lunchfood);
+        stock_update(lunchfood);
+        fitness_update(lunchfood);
         if (fitness == 0 || fitness == 10){
             etat = byebyelife;
         }else if (fitness == 1 || fitness == 2 || fitness == 3 || fitness == 7 || fitness == 8 || fitness == 9){
@@ -114,6 +124,6 @@ int main(){
         printf("______________________________________________________________________________________________\n\n");
     }
     /*Lorsque la partie est finie, on affiche la vache morte et on conclu avec une phrase et son age*/
-    affiche_vache(etat);
-    printf("Vous avez perdu, votre vache avait %d ans\n",dureedevie);
+    affiche_vache(etat, dureedevie);
+    return 0;
 }
