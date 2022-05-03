@@ -15,8 +15,11 @@ image
 1. Fonction affiche :
 ```c
 void affiche_vache(int etat){
+    /* Déclaration des yeux et de la langue */
     char yeux[3];
     char langue[2];
+
+    /* Dépendamment de l'état actuel on modifie les yeux et la langue*/
     switch (etat)
     {
     case byebyelife:
@@ -32,7 +35,11 @@ void affiche_vache(int etat){
         strcpy(langue," \0");
         break;
     }
+
+    /* On crée la vache de base qui "prend en paramètre" les yeux et la langue*/
     char vache[1000] = "          ^ __ ^\n           (%s)\\_______\n           (__)\\       )\\/\\\n   O         %s ||----w |\n  \\|/          ||     ||             \\|/\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n";
+    
+    /* On affiche la vache avec les yeux et la langue modifiés */
     printf(vache, yeux, langue);
 }
 ```

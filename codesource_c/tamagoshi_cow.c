@@ -47,6 +47,8 @@ void update_stock(int lunchfood){
     /*On génère un nombre entre -3 et 3 inclus*/
     int crop = (rand() % 8) - 3;
     stock = stock + crop - lunchfood;
+
+    /*Notre stock doit obligatoirement être en 0 et 10 inclus*/
     if (stock<0){
         stock = 0;
     }
@@ -56,11 +58,16 @@ void update_stock(int lunchfood){
 }
 
 void update_fitness(int lunchfood){
+    /* On initialise le generateur de nombres aleatoires */
     time_t t ;
     t = t + 12232;
     srand((unsigned)time(&t));
+
+    /*On génère un nombre entre -3 et 0 inclus*/
     int digestion = (rand() % 4) - 3;
     fitness = fitness + digestion + lunchfood;
+    
+    /*Notre stock doit obligatoirement être en 0 et 10 inclus*/
     if (fitness<0){
         fitness = 0;
     }
@@ -70,12 +77,19 @@ void update_fitness(int lunchfood){
 }
 
 int main(){
+    /*Initialisation de variable */
     int lunchfood;
     int dureedevie = 0;
     int etat = 2;
+
+    /*Boucle qui va vérifier que la vache n'est pas morte et qui compte sa durée de vie*/
     while (etat != byebyelife)
     {
+        /*affiche l'état courant de la vache en la dessinant*/
         affiche_vache(etat);
+
+        /*On affiche le stock restant et on demande de rentrer
+        une valeur de lunchfood qui doit être compris entre le stock et 0 compris*/ 
         printf("stock : %d\n", stock);
         printf("lunchfood? : ");
         scanf("%d", &lunchfood);
@@ -83,6 +97,10 @@ int main(){
             printf("Veuillez entrer une valeur entre 0 et %d.\n    lunchfood? : ", stock);
             scanf("%d", &lunchfood);
         }
+        
+        /* On met à jour les valeurs du stock et du fitness et selon 
+        la valeur du fitness la vache change d'état et nous refaisons cette boucle 
+        tant que la vache ne soit pas dans l'état byebyelife et si ce n'est pas le cas, on ajoute un à la durée de vie*/
         update_stock(lunchfood);
         update_fitness(lunchfood);
         if (fitness == 0 || fitness == 10){
@@ -95,6 +113,7 @@ int main(){
         dureedevie = dureedevie + 1;
         printf("______________________________________________________________________________________________\n\n");
     }
+    /*Lorsque la partie est finie, on affiche la vache morte et on conclu avec une phrase et son age*/
     affiche_vache(etat);
     printf("Vous avez perdu, votre vache avait %d ans\n",dureedevie);
 }
