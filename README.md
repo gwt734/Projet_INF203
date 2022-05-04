@@ -10,6 +10,8 @@
 
 ### Automate
 
+FLD = fitness+lunchfood+digestion
+
 ![Schéma de l'automate](Automate.drawio.png)
 
 ### tamagoshi.cow
