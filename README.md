@@ -1,6 +1,22 @@
 # Projet_INF203
 
 ## 1 - Préliminaires
+### Options :
+- -b :
+- -d : affiche une vache morte.
+- -g :
+- -p :
+- -t : affiche une vache fatiguée.
+- -y :
+- -W : nécessite un entier en argument suivant. Cet entier est le nombre de caractères maximum que peux contenir une ligne de texte dans la bulle de parole de la vache.
+- -e : nécessite une chaîne de deux caractères après qui remplacera les yeux de base de la vache (OO).
+- -T : nécessite une chaîne de deux caractères après qui deviendra la de la vache.
+- -f : permet de spécifier le nom du fichier qui sera utilisé pour trouver le dessin de la vache.
+- -r : affiche une vache choisie aléatoirement dans le répertoire COWPATH.
+- -c :
+- -l : affiche l'ensemble des "dessins" de vache qui se trouve dans le répertoire COWPATH.
+- -h : affiche une aide pour l'utilisation de la commande cowsay.
+
 
 ## 2 - Bash
 
