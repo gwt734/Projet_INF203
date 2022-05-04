@@ -22,6 +22,397 @@
 
 ## 3 - C
 
+### new_cow
+
+1. Fonction affiche :
+```c
+void affiche_vache(int argc, char *argv[]){
+    /*On initialise les yeux et la langue en des caractères spécifiques ainsi qu'une vache */
+    char yeux[3] = "OO\0";
+    char langue[2] = " \0";
+    char vache[1000] = "        \\ ^ __ ^\n         \\ (%s)\\_______\n           (__)\\       )\\/\\\n             %s ||----w |\n               ||     ||\n";
+    
+    /*Cette boucle va permettre de modifier la langue et les yeux en rentrant une option comme -T en argument
+    avec le caractère par lequel on veut le remplacer on peut aussi le faire avec les yeux en suivant le même fonctionnement 
+    mais à la place de -T on met -e*/
+    for (int i = 0; i < argc; i++)
+    {
+        if (strcmp(argv[i],"-T")==0){
+            if (argc > i+1){
+                langue[0] = argv[i + 1][0];
+            }else{
+                printf("Il manque un argument après l'option -T.\n");
+                exit(EXIT_FAILURE);
+            }
+        }
+        if (strcmp(argv[i],"-e")==0){
+            if (argc > i+1){
+                yeux[0] = argv[i + 1][0];
+                yeux[1] = argv[i + 1][1];
+            }else{
+                printf("Il manque un argument après l'option -e.\n");
+                exit(EXIT_FAILURE);
+            }
+             
+        }
+        /*Et lorsqu'on lui donne -parle ainsi qu'un autre argument, alors la vache va dire l'argument apres -parle*/
+        if (strcmp(argv[i],"-parle")==0){
+            if (argc > i+1){
+                printf(" ");
+                for (int j = 0; j < 2+strlen(argv[i+1]); j++){
+                    printf("-");
+                }
+                printf("\n< ");
+                for (int j = 0;argv[i+1][j] != '\0'; j++){
+                    printf("%c", argv[i+1][j]);
+                }
+                printf(" >\n ");
+                for (int j = 0; j < 2+strlen(argv[i+1]); j++){
+                    printf("-");
+                }
+                printf("\n");
+            }else{
+                printf("Il manque un argument après l'option -parle.\n");
+                exit(EXIT_FAILURE);
+            }
+        }
+    /*Cette boucle nous permet de faire danser notre vache et en reprenant la même 
+    logique que précédemment, pour qu'elle danse il faut lui rentrer l'argument -danse 
+    ainsi que le nombre de fois qu'elle effectura cette danse*/
+    for (int i = 0; i <argc; i++){
+        if (strcmp(argv[i], "-danse") == 0)
+        {
+            int nombre_tours = atoi(argv[i + 1]);
+            for (int j = 0; j < nombre_tours-1; j++)
+            {
+                strcpy(vache, "                 /)  (\\\n            .~._((,\"\".))_.~,\n             `~.   %s   ,~'\n               / ,n~~n. \\\n              { { .__. } }\n               ) `~ %s~' (\n              /`-._  _.-'\\\n             /            \\\n           ,-X            X-.\n          /   \\          /   \\\n         (     )| |  | |(     )\n          \\   / | |  | | \\   /\n           \\_(.-( )--( )-.)_/\n           /_,\\ ) /  \\ ( /._\\\n               /_,\\  /._\\\n");
+                printf(vache, yeux, langue);
+                sleep(1);
+                printf("\n");
+                strcpy(vache, "                 /)  (\\\n            .-._((,~~.))_.-,\n             `-.   %s   ,-'\n               / ,n--n. \\\n       (`'\\   ( ( .__. ) )  /`')\n        `.'\"._ ) `- %s-' (_,\"`.'\n          \"._             _,\"\n             /            \\\n            (              )\n            (`-.__    __.-')\n             \\   /`--'\\   /\n              ) /      \\ (\n             /._\\      /_,\\\n");
+                printf(vache, yeux, langue);
+                printf("\n");
+                sleep(1);
+            }
+            strcpy(vache, "                 /)  (\\\n            .~._((,\"\".))_.~,\n             `~.   %s   ,~'\n               / ,n~~n. \\\n              { { .__. } }\n               ) `~ %s~' (\n              /`-._  _.-'\\\n             /            \\\n           ,-X            X-.\n          /   \\          /   \\\n         (     )| |  | |(     )\n          \\   / | |  | | \\   /\n           \\_(.-( )--( )-.)_/\n           /_,\\ ) /  \\ ( /._\\\n               /_,\\  /._\\\n");
+        }
+    }
+    }
+    printf(vache, yeux, langue);
+}
+```
+Dans cette fonction, nous avons décidé que l'utilisateur pouvait changer les yeux et la langue de la vache en entrant en argument "-e" pour changer les yeux avec un deuxième argument pour remplacer les yeux ou "-T" pour la langue avec aussi un deuxième argument pour la remplacer. 
+Nous avons également décidé de faire en sorte qu'elle puisse parler. Pour cela nous avons du nous même créer la bulle dans lequel le message qu'elle dira apparaitra. Ce message est d'ailleurs l'argument qui sera rentré par l'utilisateur.
+Nous pouvons ensuite la faire danser en suivant la même syntaxe pour les arguments mais en mettant -danse et le nombre de fois qu'elle fera la danse. 
+
+1.1 Exemples d'éxécution : 
+- changer les yeux :
+arguments : -e vv 
+```c
+        \ ^ __ ^
+         \ (vv)\_______
+           (__)\       )\/\
+               ||----w |
+               ||     ||
+```
+
+- changer de langue :
+arguments : -T W 
+```c
+        \ ^ __ ^
+         \ (OO)\_______
+           (__)\       )\/\
+             W ||----w |
+               ||     ||
+```
+
+- parler : 
+arguments : -parle bonjour 
+```c
+ ---------
+< bonjour >
+ ---------
+        \ ^ __ ^
+         \ (OO)\_______
+           (__)\       )\/\
+               ||----w |
+               ||     ||
+```
+
+- danser : 
+arguments : -danse 2 
+```c
+                 /)  (\
+            .~._((,"".))_.~,
+             `~.   OO   ,~'
+               / ,n~~n. \
+              { { .__. } }
+               ) `~  ~' (
+              /`-._  _.-'\
+             /            \
+           ,-X            X-.
+          /   \          /   \
+         (     )| |  | |(     )
+          \   / | |  | | \   /
+           \_(.-( )--( )-.)_/
+           /_,\ ) /  \ ( /._\
+               /_,\  /._\
+
+                 /)  (\
+            .-._((,~~.))_.-,
+             `-.   OO   ,-'
+               / ,n--n. \
+       (`'\   ( ( .__. ) )  /`')
+        `.'"._ ) `-  -' (_,"`.'
+          "._             _,"
+             /            \
+            (              )
+            (`-.__    __.-')
+             \   /`--'\   /
+              ) /      \ (
+             /._\      /_,\
+
+                 /)  (\
+            .~._((,"".))_.~,
+             `~.   OO   ,~'
+               / ,n~~n. \
+              { { .__. } }
+               ) `~  ~' (
+              /`-._  _.-'\
+             /            \
+           ,-X            X-.
+          /   \          /   \
+         (     )| |  | |(     )
+          \   / | |  | | \   /
+           \_(.-( )--( )-.)_/
+           /_,\ ) /  \ ( /._\
+               /_,\  /._\
+
+                 /)  (\
+            .-._((,~~.))_.-,
+             `-.   OO   ,-'
+               / ,n--n. \
+       (`'\   ( ( .__. ) )  /`')
+        `.'"._ ) `-  -' (_,"`.'
+          "._             _,"
+             /            \
+            (              )
+            (`-.__    __.-')
+             \   /`--'\   /
+              ) /      \ (
+             /._\      /_,\
+
+                 /)  (\
+            .~._((,"".))_.~,
+             `~.   OO   ,~'
+               / ,n~~n. \
+              { { .__. } }
+               ) `~  ~' (
+              /`-._  _.-'\
+             /            \
+           ,-X            X-.
+          /   \          /   \
+         (     )| |  | |(     )
+          \   / | |  | | \   /
+           \_(.-( )--( )-.)_/
+           /_,\ ) /  \ ( /._\
+               /_,\  /._\
+```
+
+
+2. Fonction update et goto :
+
+La fonction update permet d'effacer le terminal durant l'éxécution du programme.
+
+La fonction goto(x,y) permet de se placer à un point exat dans le terminal en partant du haut à gauche pour modifier l'affichage et avoir quelque chose d'animé. De plus, le x représente l'axe des ordonées et le y celui des abscisses. 
+
+3. Fonction wild_cow :
+```c
+void cligne2(){
+    /*On fait un premier update pour effacer ce qu'il y a dans le terminal*/
+    update();
+    char *argv[2];
+    argv[0] = "-e";
+    argv[1] = "-O";
+    /*On affiche la vache une fois avec les yeux ouverts ou refais un update puis avec les yeux fermés ...*/
+    affiche_vache(0, argv);
+    sleep(1);
+    update();
+    affiche_vache(2, argv);
+    sleep(1);
+    update();
+    affiche_vache(0,argv);
+}
+```
+Cette fonction permet à la vache animé de faire un clin d'oeil.
+Dans cette fonction, nous n'avons pas utilisé la fonction goto(x,y) car au début, nous n'avions pas réellement compris comment elle fonctionnait. Par manque de temps nous n'avons pu l'améliorer ou la modifier. 
+
+3.1 Exemple d'éxécution :
+```c
+        \ ^ __ ^
+         \ (OO)\_______
+           (__)\       )\/\
+               ||----w |
+               ||     ||
+        \ ^ __ ^
+         \ (-O)\_______
+           (__)\       )\/\
+               ||----w |
+               ||     ||
+        \ ^ __ ^
+         \ (OO)\_______
+           (__)\       )\/\
+               ||----w |
+               ||     ||
+```
+Cependant ce n'est pas vraiment cette affichage que l'on a car on ne voit à l'écran qu'une seule d'entre elle.
+Or nous avons mis l'exemple comme cela pour bine comprendre le fonctionnement de notre programme.
+
+### readingcow
+
+1. Fonction affiche :
+```c
+void affiche_vache(int argc, char *argv[]){
+    char yeux[3] = "OO\0";
+    char langue[2] = " \0";
+    char vache[1000] = "        \\ ^ __ ^\n         \\ (%s)\\_______\n           (__)\\       )\\/\\\n             %s ||----w |\n               ||     ||\n";
+    for (int i = 0; i < argc; i++)
+    {
+        if (strcmp(argv[i],"-T")==0){
+            if (argc > i+1){
+                langue[0] = argv[i + 1][0];
+            }else{
+                printf("Il manque un argument après l'option -T.\n");
+                exit(EXIT_FAILURE);
+            }
+        }
+        if (strcmp(argv[i],"-e")==0){
+            if (argc > i+1){
+                yeux[0] = argv[i + 1][0];
+                yeux[1] = argv[i + 1][1];
+            }else{
+                printf("Il manque un argument après l'option -e.\n");
+                exit(EXIT_FAILURE);
+            }
+             
+        }
+
+        if (strcmp(argv[i],"-parle")==0){
+            if (argc > i+1){
+                printf(" ");
+                for (int j = 0; j < 2+strlen(argv[i+1]); j++){
+                    printf("-");
+                }
+                printf("\n< ");
+                for (int j = 0;argv[i+1][j] != '\0'; j++){
+                    printf("%c", argv[i+1][j]);
+                }
+                printf(" >\n ");
+                for (int j = 0; j < 2+strlen(argv[i+1]); j++){
+                    printf("-");
+                }
+                printf("\n");
+            }else{
+                printf("Il manque un argument après l'option -parle.\n");
+                exit(EXIT_FAILURE);
+            }
+        }
+    for (int i = 0; i <argc; i++){
+        if (strcmp(argv[i], "-danse") == 0)
+        {
+            int nombre_tours = atoi(argv[i + 1]);
+            for (int j = 0; j < nombre_tours-1; j++)
+            {
+                strcpy(vache, "                 /)  (\\\n            .~._((,\"\".))_.~,\n             `~.   %s   ,~'\n               / ,n~~n. \\\n              { { .__. } }\n               ) `~ %s~' (\n              /`-._  _.-'\\\n             /            \\\n           ,-X            X-.\n          /   \\          /   \\\n         (     )| |  | |(     )\n          \\   / | |  | | \\   /\n           \\_(.-( )--( )-.)_/\n           /_,\\ ) /  \\ ( /._\\\n               /_,\\  /._\\\n");
+                printf(vache, yeux, langue);
+                sleep(1);
+                printf("\n");
+                strcpy(vache, "                 /)  (\\\n            .-._((,~~.))_.-,\n             `-.   %s   ,-'\n               / ,n--n. \\\n       (`'\\   ( ( .__. ) )  /`')\n        `.'\"._ ) `- %s-' (_,\"`.'\n          \"._             _,\"\n             /            \\\n            (              )\n            (`-.__    __.-')\n             \\   /`--'\\   /\n              ) /      \\ (\n             /._\\      /_,\\\n");
+                printf(vache, yeux, langue);
+                printf("\n");
+                sleep(1);
+            }
+            strcpy(vache, "                 /)  (\\\n            .~._((,\"\".))_.~,\n             `~.   %s   ,~'\n               / ,n~~n. \\\n              { { .__. } }\n               ) `~ %s~' (\n              /`-._  _.-'\\\n             /            \\\n           ,-X            X-.\n          /   \\          /   \\\n         (     )| |  | |(     )\n          \\   / | |  | | \\   /\n           \\_(.-( )--( )-.)_/\n           /_,\\ ) /  \\ ( /._\\\n               /_,\\  /._\\\n");
+        }
+    }
+    }
+    printf(vache, yeux, langue);
+}
+void update() { printf("\033[H\033[J"); }
+void gotoxy(x, y) { printf(" \033[%d;%dH", x, y); }
+```
+Nous avons utilisé la même fonction affiche que précédemment car nous utilisons certaines options comme le changement de langue ou encore l'otpion -parle. 
+
+2. Fonction main : 
+```c
+int main(int argc,char *argv[]){
+    /*On ouvre le fichier que l'on va vouloir lui faire manger*/
+    FILE *f=fopen(argv[1], "r");
+    char fichier[100];
+    char c;
+    /*On va prendre toutes les caractères du fichier un a un et grâce au for d'abord ils vont passé au niveau de la langue de la vache grâce à l'option -T expliqué auparavant puis grâce à l'option -T, la lettre va ensuite s'afficher dans la bulle. On update à chaque itérattion pour que cela soit animé.*/
+    fscanf(f, "%c", &c);
+    for(int i = 0; !feof(f); i++){
+        update();
+        char *argw[4];
+        argw[0] = "-T";
+        char str_c[1];
+        str_c[0] = c;
+        argw[1] = str_c;
+        argw[2] = "-parle";
+        argw[3] = fichier;
+        affiche_vache(4, argw);
+        sleep(1);
+        fichier[i]=c;
+        fscanf(f, "%c", &c);
+    }
+    update();
+    char *argw[2];
+    argw[0] = "-parle";
+    argw[1] = fichier;
+    affiche_vache(2, argw);
+}
+```
+Cette fonction, permettre à la vache de manger un mot ou un texte caractère par caractère et de le faire apparaitre dans la bulle au dessus de sa tête. Nous avons donc décidé de nous aider de notre fonction affiche_vache pour que cela soit plus simple et plus rapide à coder. 
+
+2.1 Exemple d'éxécution : 
+```c
+ --
+<  >
+ --
+        \ ^ __ ^
+         \ (OO)\_______
+           (__)\       )\/\
+             m ||----w |
+               ||     ||
+ ---
+< m >
+ ---
+        \ ^ __ ^
+         \ (OO)\_______
+           (__)\       )\/\
+             e ||----w |
+               ||     ||
+ ----
+< me >
+ ----
+        \ ^ __ ^
+         \ (OO)\_______
+           (__)\       )\/\
+             u ||----w |
+               ||     ||
+ ------
+< meuh >
+ ------
+        \ ^ __ ^
+         \ (OO)\_______
+           (__)\       )\/\
+               ||----w |
+               ||     ||
+```
+Une nouvelle fois, lors de l'éxécution du programme, nous avons qu'une seule de ses vaches qui est affichée sur le terminal.
+
+
 ## 4 - Automates
 
 ### Automate
@@ -30,37 +421,47 @@ FLD = fitness+lunchfood+digestion
 
 ![Schéma de l'automate](Automate.drawio.png)
 
-### tamagoshi.cow
+### tamagoshi_cow
 
 1. Fonction affiche :
 ```c
-void affiche_vache(int etat){
+void affiche_vache(int etat, int dureedevie){
     /* Déclaration des yeux et de la langue */
     char yeux[3];
     char langue[2];
 
+    /* On crée la vache de base qui "prend en paramètre" les yeux et la langue*/
+    char vache[1000] = "          ^ __ ^\n           (%s)\\_______\n           (__)\\       )\\/\\\n   O         %s ||----w |\n  \\|/          ||     ||             \\|/\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n";
+    
     /* Dépendamment de l'état actuel on modifie les yeux et la langue*/
     switch (etat)
     {
     case byebyelife:
-        strcpy(yeux,"XX\0");
-        strcpy(langue,"U\0");
+        if (dureedevie < 10)
+        {
+            strcpy(vache," _____________\n |    RIP    | - __ -_______\n |   Vache   |  (XX)_\\       )\\/\\\n |  0%d jours |  (__)==\\----w/===\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^\n");
+            printf(vache, dureedevie);
+        }
+        else if (dureedevie < 100)
+        {
+            strcpy(vache," _____________\n |    RIP    | - __ -_______\n |   Vache   |  (XX)_\\       )\\/\\\n |  %d jours |  (__)==\\----w/===\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^\n");
+            printf(vache, dureedevie);
+        }
+        else
+        {
+            strcpy(vache," _____________\n |    RIP    | - __ -_______\n |   Vache   |  (XX)_\\       )\\/\\\n | Trop agée |  (__)==\\----w/===\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+            printf("%s",vache);
+        }
         break;
     case lifesucks:
-        strcpy(yeux,"--\0");
-        strcpy(langue," \0");
+        strcpy(vache,"          ^ __ ^\n           (--)\\_______\n           (__)\\       )\\/\\\n   O           ||----w |\n  \\|/          ||     ||             \\|/\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+        printf("%s",vache);
         break;
     case liferocks:
-        strcpy(yeux,"OO\0");
-        strcpy(langue," \0");
+        strcpy(vache,"           ^ __ ^\n            (OO)\n           ~(o_)\\\n           \\\\//  \\\n            ~  \\  \\/\\/\n                ||\n                ||\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+        printf("%s",vache);
         break;
     }
-
-    /* On crée la vache de base qui "prend en paramètre" les yeux et la langue*/
-    char vache[1000] = "          ^ __ ^\n           (%s)\\_______\n           (__)\\       )\\/\\\n   O         %s ||----w |\n  \\|/          ||     ||             \\|/\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n";
-    
-    /* On affiche la vache avec les yeux et la langue modifiés */
-    printf(vache, yeux, langue);
 }
 ```
 
@@ -126,7 +527,7 @@ int main(){
     while (etat != byebyelife)
     {
         /*affiche l'état courant de la vache en la dessinant*/
-        affiche_vache(etat);
+        affiche_vache(etat, dureedevie);
 
         /*On affiche le stock restant et on demande de rentrer
         une valeur de lunchfood qui doit être compris entre le stock et 0 compris*/ 
@@ -154,10 +555,41 @@ int main(){
         printf("______________________________________________________________________________________________\n\n");
     }
     /*Lorsque la partie est finie, on affiche la vache morte et on conclu avec une phrase et son age*/
-    affiche_vache(etat);
-    printf("Vous avez perdu, votre vache avait %d ans\n",dureedevie);
+    affiche_vache(etat, dureedevie);
     return 0;
 }
 ```
+Dans cette fonction main, la vache va pouvoir avoir une vie complète et sa durée de vie dépendra de si l'utilisateur arrive à la nourrir correctement.
+Un exemple d'éxécution ci-dessous est donné où l'on peut observer que notre vache peut être dans trois états différents et que lorsque qu'elle meurt, la partie est terminée. 
 
+4.1 Exemple d'éxécution :
+```c
+           ^ __ ^
+            (OO)
+           ~(o_)\
+           \\//  \
+            ~  \  \/\/
+                ||
+                ||
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+stock : 5
+lunchfood? : 2
+______________________________________________________________________________________________
+
+          ^ __ ^
+           (--)\_______
+           (__)\       )\/\
+   O           ||----w |
+  \|/          ||     ||             \|/
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+stock : 7
+lunchfood? : 7
+______________________________________________________________________________________________
+
+ _____________
+ |    RIP    | - __ -_______
+ |   Vache   |  (XX)_\       )\/\
+ |  02 jours |  (__)==\----w/===
+^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^
+``` 
 

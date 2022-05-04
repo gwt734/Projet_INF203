@@ -74,9 +74,14 @@ void gotoxy(x, y) { printf(" \033[%d;%dH", x, y); }
 
 
 int main(int argc,char *argv[]){
+    /*On ouvre le fichier que l'on va vouloir lui faire manger*/
     FILE *f=fopen(argv[1], "r");
     char fichier[100];
     char c;
+    /*On va prendre toutes les caractères du fichier un a un et grâce au for 
+    d'abord ils vont passé au niveau de la langue de la vache grâce à l'option -T 
+    expliqué auparavant puis grâce à l'option -T, la lettre va ensuite s'afficher dans la bulle.
+    On update à chaque itérattion pour que cela soit animé.*/
     fscanf(f, "%c", &c);
     for(int i = 0; !feof(f); i++){
         update();
