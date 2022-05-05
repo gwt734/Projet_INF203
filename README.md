@@ -20,6 +20,435 @@
 
 ## 2 - Bash
 
+Dans toute la partie bash, nos programmes commencent par ``` #!/bin/bash ``` pour que notre fichier soit bien un fichier bash.
+
+### cow_kindergarten
+```c
+#!/bin/bash
+#boucle qui sera répétée 10 fois
+for i in {1..10}
+do
+#la vache dira la valeur que i aura
+cowsay $i
+#pause de 1 seconde
+sleep 1
+done
+#la vache tire la langue
+cowsay -T "U " meuh
+```
+
+Dans cette fonction, la vache prononce les chiffres de 1 a 10 avec une pause d’une seconde entre chaque chiffre. Elle tire la langue lorsque la boucle est terminée.
+
+Exemple d'éxécution :
+```c
+ ___
+< 1 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+< 2 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+< 3 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+< 4 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+< 5 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+< 6 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+< 7 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+< 8 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+< 9 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ____
+< 10 >
+ ----
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ______
+< meuh >
+ ------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+             U  ||----w |
+                ||     ||
+```
+
+
+### cow_primaryschool
+```c
+#!/bin/bash
+#boucle qui sera répétée n fois
+for i in $(eval echo {1..$1})
+do
+#La vache dira la valeur que i aura
+cowsay $i
+#pause de 1 seconde
+sleep 1
+done
+#la vache tire la langue
+cowsay -T "U " meuh
+```
+La vache prononce les chiffres de 1 a n avec n un nombre donné en argument.
+Lors de la réalisation de cette fonction, nous avons mis du temps à comprendre que lorsque nous voulions utilisé des valeurs non fixes c'est-à-dire pas des nombres, nous devions mettre ```$(eval echo )``` avant la variable.
+
+Exemple d'éxécution :
+arguments : 2
+```c
+ ___
+< 1 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+< 2 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ______
+< meuh >
+ ------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+             U  ||----w |
+                ||     ||
+```
+
+### cow_highschool
+```c
+#!/bin/bash
+#boucle répétée n fois 
+for i in $(eval echo {1..$1})
+do
+#la vache prononcera la multiplication des deux mêmes chiffres donc le carré
+cowsay $(expr $i \* $i)
+#pause de 1 seconde
+sleep 1
+done
+#vache qui tire la langue
+cowsay -T "U " meuh
+```
+Cette vache pourra dire les carrés des chiffres ou nombres qui se trouvent entre 1 et n avec n qui sera donné en argument. 
+Lors de la réalisation de ce programme, nous ne comprenions pas pourquoi on ne pouvait pas juste marqué ```cowsay $i*$i```. Nous avons ensuite vu dans le cours que lorsque nous voulions faire des opérations sur des valeurs de variables, nous devons mettre ```$(expr )``` et que nous devions aussi mettre un ```\``` devant le ```*``` pour qu'il soit pris pour un opérateur. 
+
+Exemple d'éxécution :
+argument : 3
+```c
+ ___
+< 1 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+< 4 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+< 9 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ______
+< meuh >
+ ------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+             U  ||----w |
+                ||     ||
+```
+
+### cow_college 
+
+La suites de Fibonacci est une suite de nombre tel que ses deux premiers termes sont 0 et 1, et ensuite, chaque terme successif est la somme des deux termes précédents. Ainsi 0+1=1, 1+1=2, 1+2=3, 2+3=5, 3+5=8, etc.
+
+```c
+#!/bin/bash
+#initialisation des deux premier termes
+u0=0
+u1=1
+#premier termes calculé
+cowsay zero
+sleep 1
+cowsay $u1
+sleep 1
+un1=$u1
+un2=$u0
+u=$(expr $un1 + $un2)
+#calcul des autres termes jusqu a la fin
+while [ $u -le $1 ]
+do
+cowsay $u
+sleep 1
+un2=$un1
+un1=$u
+u=$(expr $un1 + $un2)
+done
+#vache tire la langue
+cowsay -T "U " meuh
+```
+Dans notre programme, nous avons d'abord initialisé les deux premiers termes à 0 et 1. Ensuite nous affichons le premier terme qui est zéro. Cependant, on peut remarquer que l'on affiche zéro en lettre et ce n'est pas la valeur de u0 car lorsque nous mettions cela, le programme affichait zéro et ne continuait pas la suite. Nous avons donc trouvé cette alternative. Ensuite nous affichons la valeur de u1 puis nous changeons les valeurs, c'est-à-dire que notre u2 aura comme valeur 0 et u1 restera à 1. Puis nous initialisons u à la valeur de u1+u2 et nous échangeons dans la boucle jusqu'à tomber sur le nombre donné en argument.
+
+Exemple d'éxécution :
+argument : 5
+```c
+ ______
+< zero >
+ ------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+< 1 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+< 1 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+< 2 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+< 3 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+< 5 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ______
+< meuh >
+ ------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+             U  ||----w |
+                ||     ||
+```
+
+### cow_university
+```c
+#!/bin/bash
+j=1
+#prononce le premier nombre premier
+cowsay 2
+sleep 1
+#boucle pour aller jusqu a la valeur en argument
+while [ $j -le $1 ]
+do
+if [ $j -gt 1 ]
+then
+estPremier=1 
+for i in $(eval echo {2..$(expr 1 + $(expr $j / 2 ))})
+do
+#condition pour être un nombre premier
+if [ $(expr $j % $i) -eq 0 ]
+then
+estPremier=0
+fi
+done
+fi
+#affichage du nombre si il est premier
+if [[ $estPremier -eq 1 ]]
+then
+cowsay $j
+sleep 1
+fi
+#itération pour ne pas etre dans une boucle infinie
+j=$(expr $j + 1)
+done
+cowsay -T "U " meuh
+```
+Dans ce programme nous avons d'abord affiché la valeur du 2 car c'est un nombre premier cependant elle ne s'affiche pas avec les boucles que nous avaons faites car elle ne respecte pas les conditions. 
+Ensuite, nous commencé une boucle pour que le prgramme s'arrête à la valeur demandé c'est-à-dire que le programme doit s'arrêter avant que la valeur en argument soit dépassée. Ensuite grâce à plusieurs conditions, on vérifie ou non si le chiffre est un nomre premier et si oui on l'affiche. 
+
+Exemple d'éxécution :
+argument : 4
+```c
+ ___
+< 2 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+< 3 >
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ______
+< meuh >
+ ------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+             U  ||----w |
+                ||     ||
+```
+
+
+### smart_cow 
+```c
+#!/bin/bash
+#on decoupe chaque partie de l agument pour récuperer les deux chiffres et l opérateur
+n1=$(echo $1 | cut -c1 )
+n2=$(echo $1 | cut -c3)
+operateur=$(echo $1 | cut -c2)
+
+#en fonction de l operateur on adapte le calul a faire
+if [ $operateur = "+" ]
+then
+resultat=$(expr $n1 + $n2)
+elif [ $operateur = "-" ]
+then
+resultat=$(expr $n1 - $n2)
+elif [ "$operateur" = "*" ]
+then
+resultat=$(expr $n1 \* $n2)
+elif [ $operateur = "/" ]
+then
+resultat=$(expr $n1 / $n2)
+elif [ $operateur = "%" ]
+then
+resultat=$(expr $n1 % $n2)
+fi
+
+#on met le résultat dans ses yeux et le calul dans sa bulle 
+cowsay -e $resultat $1
+sleep 1
+cowsay -T \U meuh
+```
+Dans ce programme, nous récupérons d'abord le premier caractère qui sera la premier chiffre, le deuwième qui sera l'opérateur et le troisième qui sera le deuxième chiffre. Ensuite selon la valeur de l'opérateur on effectue le calcul et on met le résultat dasn les yeux de la vache.
+
+Exemple d'éxécution :
+argument : 2+3
+```c
+ _____
+< 2+3 >
+ -----
+        \   ^__^
+         \  (5)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ______
+< meuh >
+ ------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+             U ||----w |
+               ||     ||
+```
+
+### crazy_cow 
+
+
+
+
 ## 3 - C
 
 ### new_cow
