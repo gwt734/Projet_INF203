@@ -419,7 +419,7 @@ Une nouvelle fois, lors de l'éxécution du programme, nous avons qu'une seule d
 
 FLD = fitness+lunchfood+digestion
 
-![Schéma de l'automate](Automate.drawio.png)
+![Schéma de l'automate](./images/Automate.drawio.png)
 
 ### tamagoshi_cow
 
