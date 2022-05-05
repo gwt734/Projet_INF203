@@ -10,41 +10,53 @@
 int fitness = 5;
 int stock = 5;
 
-void affiche_vache(int etat, int dureedevie){
+void affiche_vache(int etat, int dureedevie, int stock){
     /* Déclaration des yeux et de la langue */
     char yeux[3];
     char langue[2];
 
     /* On crée la vache de base qui "prend en paramètre" les yeux et la langue*/
     char vache[1000] = "          ^ __ ^\n           (%s)\\_______\n           (__)\\       )\\/\\\n   O         %s ||----w |\n  \\|/          ||     ||             \\|/\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n";
-    
+
+    int ordre_bottes_de_foin[10] = {8, 9, 5, 7, 4, 2, 10, 6, 3, 1};
+    char *bottes_de_foins[10];
+
+    for (int i = 0; i < 10; i++){
+        if (stock>=i+1){
+            bottes_de_foins[ordre_bottes_de_foin[i]-1] = "##";
+        }else{
+            bottes_de_foins[ordre_bottes_de_foin[i]-1] = "  ";
+        }
+    }
+
     /* Dépendamment de l'état actuel on modifie les yeux et la langue*/
     switch (etat)
     {
     case byebyelife:
         if (dureedevie < 10)
         {
-            strcpy(vache," _____________\n |    RIP    | - __ -_______\n |   Vache   |  (XX)_\\       )\\/\\\n |  0%d jours |  (__)==\\----w/===\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^\n");
+            strcpy(vache, " _____________\n |    RIP    | - __ -_______\n |   Vache   |  (XX)_\\       )\\/\\\n |  0%d jours |  (__)==\\----w/===     \\|/\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
             printf(vache, dureedevie);
         }
         else if (dureedevie < 100)
         {
-            strcpy(vache," _____________\n |    RIP    | - __ -_______\n |   Vache   |  (XX)_\\       )\\/\\\n |  %d jours |  (__)==\\----w/===\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^\n");
+            strcpy(vache, " _____________\n |    RIP    | - __ -_______\n |   Vache   |  (XX)_\\       )\\/\\\n |  %d jours |  (__)==\\----w/===     \\|/\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
             printf(vache, dureedevie);
         }
         else
         {
-            strcpy(vache," _____________\n |    RIP    | - __ -_______\n |   Vache   |  (XX)_\\       )\\/\\\n | Trop agée |  (__)==\\----w/===\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
-            printf("%s",vache);
+            strcpy(vache, " _____________\n |    RIP    | - __ -_______\n |   Vache   |  (XX)_\\       )\\/\\\n | Trop agée |  (__)==\\----w/===     \\|/\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+            printf("%s", vache);
         }
         break;
     case lifesucks:
-        strcpy(vache,"          ^ __ ^\n           (--)\\_______\n           (__)\\       )\\/\\\n   O           ||----w |\n  \\|/          ||     ||             \\|/\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
-        printf("%s",vache);
+        strcpy(vache, "          ^ __ ^\n           (--)\\_______\n           (__)\\       )\\/\\\n   O           ||----w |\n  \\|/          ||     ||             \\|/\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+        printf("%s", vache);
         break;
     case liferocks:
-        strcpy(vache,"           ^ __ ^\n            (OO)\n           ~(o_)\\\n           \\\\//  \\\n            ~  \\  \\/\\/\n                ||\n                ||\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
-        printf("%s",vache);
+        // strcpy(vache,"           ^ __ ^\n            (OO)\n           ~(o_)\\\n           \\\\//  \\\n            ~  \\  \\/\\/\n   0            ||\n  \\|/           ||                   \\|/\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+        strcpy(vache, "                                                                               +&-\n                                                                            _.-^-._    .--.\n           ^ __ ^                                                        .-'   _   '-. |__|\n            (OO)                                                        /     |_|     \\|  |\n           ~(o_)\\                                                      /_____STOCK_____\\  |\n           \\\\//  \\                                                    /|       %s      |\\ |\n            ~  \\  \\/\\/                                                 |     %s %s     |  |\n   0            ||                                 |---|---|---|---|---|    %s %s %s   |  |\n  \\|/           ||                   \\|/           |---|---|---|---|---|  %s %s %s %s  |  |\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+        printf(vache, bottes_de_foins[0], bottes_de_foins[1], bottes_de_foins[2], bottes_de_foins[3], bottes_de_foins[4], bottes_de_foins[5], bottes_de_foins[6], bottes_de_foins[7], bottes_de_foins[8], bottes_de_foins[9]);
         break;
     }
 }
@@ -96,7 +108,7 @@ int main(){
     while (etat != byebyelife)
     {
         /*affiche l'état courant de la vache en la dessinant*/
-        affiche_vache(etat, dureedevie);
+        affiche_vache(etat, dureedevie, stock);
 
         /*On affiche le stock restant et on demande de rentrer
         une valeur de lunchfood qui doit être compris entre le stock et 0 compris*/ 
@@ -124,6 +136,6 @@ int main(){
         printf("______________________________________________________________________________________________\n\n");
     }
     /*Lorsque la partie est finie, on affiche la vache morte et on conclu avec une phrase et son age*/
-    affiche_vache(etat, dureedevie);
+    affiche_vache(etat, dureedevie, stock);
     return 0;
 }
