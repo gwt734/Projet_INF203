@@ -10,17 +10,14 @@
 int fitness = 5;
 int stock = 5;
 
-void affiche_vache(int etat, int dureedevie, int stock){
-    /* Déclaration des yeux et de la langue */
-    char yeux[3];
-    char langue[2];
-
+void affiche_vache(int etat, int dureedevie, int stock, char *nom_vache){
     /* On crée la vache de base qui "prend en paramètre" les yeux et la langue*/
     char vache[1000] = "          ^ __ ^\n           (%s)\\_______\n           (__)\\       )\\/\\\n   O         %s ||----w |\n  \\|/          ||     ||             \\|/\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n";
 
+    /* On initialise la liste qui défini l'ordre dans lequel remplir les bottes de foins et la liste qui contient la chaine a afficher à l'endroit de chaque bottes ("  " si pas de botte et "##" si oui). */
     int ordre_bottes_de_foin[10] = {8, 9, 5, 7, 4, 2, 10, 6, 3, 1};
     char *bottes_de_foins[10];
-
+    /* dépendamment du niveau du stock on "active" les bottes de foin correspondantes */
     for (int i = 0; i < 10; i++){
         if (stock>=i+1){
             bottes_de_foins[ordre_bottes_de_foin[i]-1] = "##";
@@ -29,29 +26,43 @@ void affiche_vache(int etat, int dureedevie, int stock){
         }
     }
 
-    /* Dépendamment de l'état actuel on modifie les yeux et la langue*/
+    char nom_vache_formatte[100];
+    strcpy(nom_vache_formatte, nom_vache);
+    int espaces_pour_nom = (11 - strlen(nom_vache))/2;
+    for (int i = 0; i < espaces_pour_nom; i++){
+        nom_vache_formatte[i] = ' ';
+    }
+    for (int i = 0; i < strlen(nom_vache); i++){
+        nom_vache_formatte[espaces_pour_nom+i] = nom_vache[i];
+    }
+    for (int i = 0; i < espaces_pour_nom  +1; i++){
+        strcat(nom_vache_formatte, " ");
+    }
+
+
+    /* Dépendamment de l'état actuel on modifie le dessin de la vache puis on l'affiche*/
     switch (etat)
     {
     case byebyelife:
         if (dureedevie < 10)
         {
-            strcpy(vache, " _____________\n |    RIP    | - __ -_______\n |   Vache   |  (XX)_\\       )\\/\\\n |  0%d jours |  (__)==\\----w/===     \\|/\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
-            printf(vache, dureedevie);
+            strcpy(vache, "                                                                               +&-\n                                                                            _.-^-._    .--.\n                                                                         .-'   _   '-. |__|\n                                                                        /     |_|     \\|  |\n                                                                       /_____STOCK_____\\  |\n _____________                                                        /|       %s      |\\ |\n |    RIP    | - __ -________                                          |     %s %s     |  |\n |%s|  (XX)_\\       )\\/\\                  |---|---|---|---|---|    %s %s %s   |  |\n |  0%d jours |  (__)==\\----w/===     \\|/           |---|---|---|---|---|  %s %s %s %s  |  |\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+            printf(vache, bottes_de_foins[0], bottes_de_foins[1], bottes_de_foins[2], nom_vache_formatte, bottes_de_foins[3], bottes_de_foins[4], bottes_de_foins[5], dureedevie, bottes_de_foins[6], bottes_de_foins[7], bottes_de_foins[8], bottes_de_foins[9]);
         }
         else if (dureedevie < 100)
         {
-            strcpy(vache, " _____________\n |    RIP    | - __ -_______\n |   Vache   |  (XX)_\\       )\\/\\\n |  %d jours |  (__)==\\----w/===     \\|/\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
-            printf(vache, dureedevie);
+            strcpy(vache, "                                                                               +&-\n                                                                            _.-^-._    .--.\n                                                                         .-'   _   '-. |__|\n                                                                        /     |_|     \\|  |\n                                                                       /_____STOCK_____\\  |\n _____________                                                        /|       %s      |\\ |\n |    RIP    | - __ -________                                          |     %s %s     |  |\n |   Vache   |  (XX)_\\       )\\/\\                  |---|---|---|---|---|    %s %s %s   |  |\n |  %d jours |  (__)==\\----w/===     \\|/           |---|---|---|---|---|  %s %s %s %s  |  |\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+            printf(vache, bottes_de_foins[0], bottes_de_foins[1], bottes_de_foins[2], bottes_de_foins[3], bottes_de_foins[4], bottes_de_foins[5], dureedevie, bottes_de_foins[6], bottes_de_foins[7], bottes_de_foins[8], bottes_de_foins[9]);
         }
         else
         {
-            strcpy(vache, " _____________\n |    RIP    | - __ -_______\n |   Vache   |  (XX)_\\       )\\/\\\n | Trop agée |  (__)==\\----w/===     \\|/\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
-            printf("%s", vache);
+            strcpy(vache, "                                                                               +&-\n                                                                            _.-^-._    .--.\n                                                                         .-'   _   '-. |__|\n                                                                        /     |_|     \\|  |\n                                                                       /_____STOCK_____\\  |\n _____________                                                        /|       %s      |\\ |\n |    RIP    | - __ -________                                          |     %s %s     |  |\n |   Vache   |  (XX)_\\       )\\/\\                  |---|---|---|---|---|    %s %s %s   |  |\n |  Trop agée |  (__)==\\----w/===     \\|/           |---|---|---|---|---|  %s %s %s %s  |  |\n^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+            printf(vache, bottes_de_foins[0], bottes_de_foins[1], bottes_de_foins[2], bottes_de_foins[3], bottes_de_foins[4], bottes_de_foins[5], bottes_de_foins[6], bottes_de_foins[7], bottes_de_foins[8], bottes_de_foins[9]);
         }
         break;
     case lifesucks:
         //strcpy(vache, "          ^ __ ^\n           (--)\\_______\n           (__)\\       )\\/\\\n   O           ||----w |\n  \\|/          ||     ||             \\|/\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
-        strcpy(vache, "                                                                               +&-\n                                                                            _.-^-._    .--.\n                                                                         .-'   _   '-. |__|\n                                                                        /     |_|     \\|  |\n          ^ __ ^                                                       /_____STOCK_____\\  |\n           (--)\\_______                                               /|       %s      |\\ |\n           (__)\\       )\\/\\                                            |     %s %s     |  |\n   O           ||----w |                           |---|---|---|---|---|    %s %s %s   |  |\n  \\|/          ||     ||             \\|/           |---|---|---|---|---|  %s %s %s %s  |  |\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+        strcpy(vache, "                                                                               +&-\n                                                                            _.-^-._    .--.\n                                                                         .-'   _   '-. |__|\n                                                                        /     |_|     \\|  |\n          ~ __ ~                                                       /_____STOCK_____\\  |\n           (--)\\_______                                               /|       %s      |\\ |\n           (__)\\       )\\/\\                                            |     %s %s     |  |\n   O           ||----w |                           |---|---|---|---|---|    %s %s %s   |  |\n  \\|/          ||     ||             \\|/           |---|---|---|---|---|  %s %s %s %s  |  |\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
         printf(vache, bottes_de_foins[0], bottes_de_foins[1], bottes_de_foins[2], bottes_de_foins[3], bottes_de_foins[4], bottes_de_foins[5], bottes_de_foins[6], bottes_de_foins[7], bottes_de_foins[8], bottes_de_foins[9]);
         break;
     case liferocks:
@@ -60,7 +71,7 @@ void affiche_vache(int etat, int dureedevie, int stock){
         printf(vache, bottes_de_foins[0], bottes_de_foins[1], bottes_de_foins[2], bottes_de_foins[3], bottes_de_foins[4], bottes_de_foins[5], bottes_de_foins[6], bottes_de_foins[7], bottes_de_foins[8], bottes_de_foins[9]);
         break;
     }
-}
+    }
 
 void stock_update(int lunchfood){
     /* On initialise le generateur de nombres aleatoires */
@@ -105,15 +116,24 @@ int main(){
     int dureedevie = 0;
     int etat = 2;
 
+    char nom_vache[11];
+    printf("Comment voulez-vous nommer votre vache ? ");
+    scanf("%s", nom_vache);
+    while (strlen(nom_vache)>11 && strlen(nom_vache)<1)
+    {
+        printf("Veuillez entrer un nom d'au moins un caractère et au plus 11.\n");
+        scanf("%s",nom_vache);
+    }
+
     /*Boucle qui va vérifier que la vache n'est pas morte et qui compte sa durée de vie*/
     while (etat != byebyelife)
     {
         /*affiche l'état courant de la vache en la dessinant*/
-        affiche_vache(etat, dureedevie, stock);
+        affiche_vache(etat, dureedevie, stock, nom_vache);
 
         /*On demande de rentrer
-        une valeur de lunchfood qui doit être compris entre le stock et 0 compris*/ 
-        printf("lunchfood? : ");
+        une valeur de lunchfood qui doit être compris entre le stock et 0 compris la boucle permet de redmander tant que la condition n'est pas vérifiée*/ 
+        printf("Combien voulez vous donner de bottes de foin à %s? : ", nom_vache);
         scanf("%d", &lunchfood);
         while (lunchfood>stock || lunchfood<0){
             printf("Veuillez entrer une valeur entre 0 et %d.\n    lunchfood? : ", stock);
@@ -136,6 +156,6 @@ int main(){
         printf("______________________________________________________________________________________________\n\n");
     }
     /*Lorsque la partie est finie, on affiche la vache morte et on conclu avec une phrase et son age*/
-    affiche_vache(etat, dureedevie, stock);
+    affiche_vache(etat, dureedevie, stock, nom_vache);
     return 0;
 }
