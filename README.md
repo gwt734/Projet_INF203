@@ -1,28 +1,30 @@
 # Projet_INF203
 
 ## 1 - Préliminaires
+
 ### Options :
-- -b :
-- -d : affiche une vache morte.
-- -g :
-- -p :
-- -t : affiche une vache fatiguée.
-- -y :
+
+- -b : affiche une vache en mode "borg" (probablement robotique, peut être en référence à Star Trek, avec des yeux en symbol égal)
+- -d : affiche une vache morte. (yeux en croix et langue qui pend)
+- -g : affiche une vache "avide". (avec des dollars dans les yeux)
+- -p : affiche une vache droguée. (avec des yeux en arobase)
+- -t : affiche une vache fatiguée. (yeux plissés)
+- -w : affiche une vache nerveuse. (avec des grands yeux)
+- -y : affiche une vache "jeune". (avec des petits yeux)
 - -W : nécessite un entier en argument suivant. Cet entier est le nombre de caractères maximum que peux contenir une ligne de texte dans la bulle de parole de la vache.
 - -e : nécessite une chaîne de deux caractères après qui remplacera les yeux de base de la vache (OO).
 - -T : nécessite une chaîne de deux caractères après qui deviendra la de la vache.
 - -f : permet de spécifier le nom du fichier qui sera utilisé pour trouver le dessin de la vache.
 - -r : affiche une vache choisie aléatoirement dans le répertoire COWPATH.
-- -c :
 - -l : affiche l'ensemble des "dessins" de vache qui se trouve dans le répertoire COWPATH.
 - -h : affiche une aide pour l'utilisation de la commande cowsay.
-
 
 ## 2 - Bash
 
 Dans toute la partie bash, nos programmes commencent par ``` #!/bin/bash ``` pour que notre fichier soit bien un fichier bash.
 
 ### cow_kindergarten
+
 ```c
 #!/bin/bash
 #boucle qui sera répétée 10 fois
@@ -40,6 +42,7 @@ cowsay -T "U " meuh
 Dans cette fonction, la vache prononce les chiffres de 1 a 10 avec une pause d’une seconde entre chaque chiffre. Elle tire la langue lorsque la boucle est terminée.
 
 Exemple d'éxécution :
+S
 ```c
  ___
 < 1 >
@@ -131,8 +134,8 @@ Exemple d'éxécution :
                 ||     ||
 ```
 
-
 ### cow_primaryschool
+
 ```c
 #!/bin/bash
 #boucle qui sera répétée n fois
@@ -151,6 +154,7 @@ Lors de la réalisation de cette fonction, nous avons mis du temps à comprendre
 
 Exemple d'éxécution :
 arguments : 2
+
 ```c
  ___
 < 1 >
@@ -179,6 +183,7 @@ arguments : 2
 ```
 
 ### cow_highschool
+
 ```c
 #!/bin/bash
 #boucle répétée n fois 
@@ -192,11 +197,13 @@ done
 #vache qui tire la langue
 cowsay -T "U " meuh
 ```
+
 Cette vache pourra dire les carrés des chiffres ou nombres qui se trouvent entre 1 et n avec n qui sera donné en argument. 
 Lors de la réalisation de ce programme, nous ne comprenions pas pourquoi on ne pouvait pas juste marqué ```cowsay $i*$i```. Nous avons ensuite vu dans le cours que lorsque nous voulions faire des opérations sur des valeurs de variables, nous devons mettre ```$(expr )``` et que nous devions aussi mettre un ```\``` devant le ```*``` pour qu'il soit pris pour un opérateur. 
 
 Exemple d'éxécution :
 argument : 3
+
 ```c
  ___
 < 1 >
@@ -232,7 +239,7 @@ argument : 3
                 ||     ||
 ```
 
-### cow_college 
+### cow_college
 
 La suites de Fibonacci est une suite de nombre tel que ses deux premiers termes sont 0 et 1, et ensuite, chaque terme successif est la somme des deux termes précédents. Ainsi 0+1=1, 1+1=2, 1+2=3, 2+3=5, 3+5=8, etc.
 
@@ -261,10 +268,12 @@ done
 #vache tire la langue
 cowsay -T "U " meuh
 ```
+
 Dans notre programme, nous avons d'abord initialisé les deux premiers termes à 0 et 1. Ensuite nous affichons le premier terme qui est zéro. Cependant, on peut remarquer que l'on affiche zéro en lettre et ce n'est pas la valeur de u0 car lorsque nous mettions cela, le programme affichait zéro et ne continuait pas la suite. Nous avons donc trouvé cette alternative. Ensuite nous affichons la valeur de u1 puis nous changeons les valeurs, c'est-à-dire que notre u2 aura comme valeur 0 et u1 restera à 1. Puis nous initialisons u à la valeur de u1+u2 et nous échangeons dans la boucle jusqu'à tomber sur le nombre donné en argument.
 
 Exemple d'éxécution :
 argument : 5
+
 ```c
  ______
 < zero >
@@ -325,6 +334,7 @@ argument : 5
 ```
 
 ### cow_university
+
 ```c
 #!/bin/bash
 j=1
@@ -357,11 +367,13 @@ j=$(expr $j + 1)
 done
 cowsay -T "U " meuh
 ```
+
 Dans ce programme nous avons d'abord affiché la valeur du 2 car c'est un nombre premier cependant elle ne s'affiche pas avec les boucles que nous avaons faites car elle ne respecte pas les conditions. 
 Ensuite, nous commencé une boucle pour que le prgramme s'arrête à la valeur demandé c'est-à-dire que le programme doit s'arrêter avant que la valeur en argument soit dépassée. Ensuite grâce à plusieurs conditions, on vérifie ou non si le chiffre est un nomre premier et si oui on l'affiche. 
 
 Exemple d'éxécution :
 argument : 4
+
 ```c
  ___
 < 2 >
@@ -391,6 +403,7 @@ argument : 4
 
 
 ### smart_cow 
+
 ```c
 #!/bin/bash
 #on decoupe chaque partie de l agument pour récuperer les deux chiffres et l opérateur
@@ -421,10 +434,12 @@ cowsay -e $resultat $1
 sleep 1
 cowsay -T \U meuh
 ```
+
 Dans ce programme, nous récupérons d'abord le premier caractère qui sera la premier chiffre, le deuwième qui sera l'opérateur et le troisième qui sera le deuxième chiffre. Ensuite selon la valeur de l'opérateur on effectue le calcul et on met le résultat dasn les yeux de la vache.
 
 Exemple d'éxécution :
 argument : 2+3
+
 ```c
  _____
 < 2+3 >
@@ -444,16 +459,133 @@ argument : 2+3
                ||     ||
 ```
 
-### crazy_cow 
+### crazy_cow
 
+Pour cette vache là, on a décidé de se pencher sur la suite de conway. C'est une suite où le terme suivant est une "description" du terme précédent. Le terme suivant est construit avec le n'ombre d'occurences de chaque chiffre suivi du chiffre lui même.
+Par exemple 1211 donnera 111221 car il y a d'abord 1 1, puis 1 2 et ensuite 2 1.
+On a tout d'abord essayer de compter le nombre d'occurences totil y en a au moins unales de chaque chiffre et de former le terme suivant en ajoutant (quand il y en a au moins un)de chaque chiffre (1,2 ou 3 car aucun autre ne peut exister pour une graine(un premier terme) de 1) accolé a son nombre d'occurence.
+Voici le code de cette version :
 
+```bash
+#!/bin/bash
+#initialisation du premier terme
+u0=$1
+#affichage du premier terme
+cowsay $u0
+sleep 1
+#initialisation
+u=$u0
+j=0
 
+#calcul des autres termes jusqu a la fin
+while [ $j -lt $2 ]
+do
+    nb_de_1=0
+    nb_de_2=0
+    nb_de_3=0
+    u_tmp=$u
+    while [ $u -gt 0 ]
+    do
+        calcul du nombre de 1
+        if [ $(($u%10)) -eq 1 ]
+        then
+            nb_de_1=$(($nb_de_1+1))
+        fi
+        #calcul du nombre de 2
+        if [ $(($u%10)) -eq 2 ]
+        then
+            nb_de_2=$(($nb_de_2+1))
+        fi
+        #calcul du nombre de 3
+        if [ $(($u%10)) -eq 3 ]
+        then
+            nb_de_3=$(($nb_de_3+1))
+        fi
+        u=$(($u/10))
+    done
+    u=0
+    echo "1: $nb_de_1"
+    echo "2: $nb_de_2"
+    echo "3: $nb_de_3"
+    if [ $nb_de_3 -gt 0 ]
+    then
+        u=$(($u+(nb_de_3*10)+3))
+    fi
+    if [ $nb_de_2 -gt 0 ]
+    then
+        u=$(($u*100+nb_de_2*10+2))
+    fi
+    if [ $nb_de_1 -gt 0 ]
+    then
+        u=$(($u*100+nb_de_1*10+1))
+    fi
+    cowsay $u
+    sleep 1
+done
+```
+
+Ceci semblait fonctionner mais au vu de l'exemple, on remarque que ça n'est pas exact car il faut en réalité compter les occurences d'un chiffre à la suite. Le programme nous donnait 1231 comme terme suivant à 1211 On a donc modifié le programme et après quelque modification notamment pour permettre d'ajouter comme argument le premier terme et le nombre de termes à afficher, Voici le code obtenu :
+
+```bash
+#!/bin/bash
+#initialisation des deux premier termes
+u0=$1
+#premier termes calculé
+cowsay $u0
+sleep 1
+u=$u0
+j=0
+
+#boucle jusqua atteindre le nombre de termes requis
+while [ $j -lt $2 ]
+do
+    #initialisation de variables utiles
+    u_tmp=$u
+    i=0
+    u=0
+    chiffre_actuel=$(( $u_tmp % 10 ))
+    nb_du_chiffre_actuel=0
+
+    #boucle pour parcourir chaque chiffre du nombre
+    while [ $u_tmp -gt 0 ]
+    do
+        #on verifie si le chiffre actuel est le meme que le precedent
+        if [ $(($u_tmp % 10)) -eq $chiffre_actuel ]
+        then
+            #si oui, on incremente le nombre de fois ou le chiffre est present
+            nb_du_chiffre_actuel=$(( $nb_du_chiffre_actuel + 1 ))
+            # on se décale de 1 pour ne pas compter le meme chiffre
+            u_tmp=$(( $u_tmp / 10 ))
+        else
+            #si non, on ajoute le nombre de fois ou le chiffre est present et le chiffre au terme suivant
+            u=$(($u+($chiffre_actuel*10**($i*2)+$nb_du_chiffre_actuel*10**(1+($i*2)))))
+            #on met a jour le chiffre actuel
+            chiffre_actuel=$(( $u_tmp % 10 ))
+            #on se décale de 1 pour ne pas compter le meme chiffre
+            u_tmp=$(($u_tmp/10))
+            nb_du_chiffre_actuel=1
+            #on incremente le nombre de groupes de chiffres identiques qui sert a placer un chiffre et son nombre d'occurences au bon endroit
+            i=$(( $i + 1 ))
+        fi
+    done
+    #on ajoute le nombre de fois ou le chiffre est present et le chiffre au terme suivant
+    u=$(($u+($chiffre_actuel*10**($i*2))+$nb_du_chiffre_actuel*10**(1+($i*2))))
+    #on affiche le resultat
+    cowsay $u
+    sleep 1
+    #on incremente le nombre de termes calculés
+    j=$(( $j + 1 ))
+done
+#vache tire la langue
+cowsay -T "U " meuh
+```
 
 ## 3 - C
 
 ### new_cow
 
 1. Fonction affiche :
+
 ```c
 void affiche_vache(int argc, char *argv[]){
     /*On initialise les yeux et la langue en des caractères spécifiques ainsi qu'une vache */
@@ -649,7 +781,7 @@ arguments : -danse 2
 ```
 
 
-2. Fonction update et goto :
+1. Fonction update et goto :
 
 La fonction update permet d'effacer le terminal durant l'éxécution du programme.
 
