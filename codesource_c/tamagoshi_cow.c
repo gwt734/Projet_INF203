@@ -50,8 +50,9 @@ void affiche_vache(int etat, int dureedevie, int stock){
         }
         break;
     case lifesucks:
-        strcpy(vache, "          ^ __ ^\n           (--)\\_______\n           (__)\\       )\\/\\\n   O           ||----w |\n  \\|/          ||     ||             \\|/\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
-        printf("%s", vache);
+        //strcpy(vache, "          ^ __ ^\n           (--)\\_______\n           (__)\\       )\\/\\\n   O           ||----w |\n  \\|/          ||     ||             \\|/\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+        strcpy(vache, "                                                                               +&-\n                                                                            _.-^-._    .--.\n                                                                         .-'   _   '-. |__|\n                                                                        /     |_|     \\|  |\n          ^ __ ^                                                       /_____STOCK_____\\  |\n           (--)\\_______                                               /|       %s      |\\ |\n           (__)\\       )\\/\\                                            |     %s %s     |  |\n   O           ||----w |                           |---|---|---|---|---|    %s %s %s   |  |\n  \\|/          ||     ||             \\|/           |---|---|---|---|---|  %s %s %s %s  |  |\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+        printf(vache, bottes_de_foins[0], bottes_de_foins[1], bottes_de_foins[2], bottes_de_foins[3], bottes_de_foins[4], bottes_de_foins[5], bottes_de_foins[6], bottes_de_foins[7], bottes_de_foins[8], bottes_de_foins[9]);
         break;
     case liferocks:
         // strcpy(vache,"           ^ __ ^\n            (OO)\n           ~(o_)\\\n           \\\\//  \\\n            ~  \\  \\/\\/\n   0            ||\n  \\|/           ||                   \\|/\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
@@ -110,9 +111,8 @@ int main(){
         /*affiche l'état courant de la vache en la dessinant*/
         affiche_vache(etat, dureedevie, stock);
 
-        /*On affiche le stock restant et on demande de rentrer
+        /*On demande de rentrer
         une valeur de lunchfood qui doit être compris entre le stock et 0 compris*/ 
-        printf("stock : %d\n", stock);
         printf("lunchfood? : ");
         scanf("%d", &lunchfood);
         while (lunchfood>stock || lunchfood<0){
