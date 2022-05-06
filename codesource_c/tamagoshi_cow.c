@@ -26,9 +26,9 @@ void affiche_vache(int etat, int dureedevie, int stock, char *nom_vache){
         }
     }
 
+    /* On ajoute des espaces autour du nom pour pouvoir l'afficher correctement*/
     char nom_vache_formatte[100];
-    strcpy(nom_vache_formatte, nom_vache);
-    int espaces_pour_nom = (11 - strlen(nom_vache))/2;
+    int espaces_pour_nom = (11 - strlen(nom_vache)) / 2;
     for (int i = 0; i < espaces_pour_nom; i++){
         nom_vache_formatte[i] = ' ';
     }
@@ -116,6 +116,7 @@ int main(){
     int dureedevie = 0;
     int etat = 2;
 
+    /*On demande de rentrer le nom de la vache dont la longueur doit etre comprise entre 1 et 11 compris la boucle permet de redmander tant que la condition n'est pas vérifiée*/ 
     char nom_vache[11];
     printf("Comment voulez-vous nommer votre vache ? ");
     scanf("%s", nom_vache);
@@ -131,8 +132,7 @@ int main(){
         /*affiche l'état courant de la vache en la dessinant*/
         affiche_vache(etat, dureedevie, stock, nom_vache);
 
-        /*On demande de rentrer
-        une valeur de lunchfood qui doit être compris entre le stock et 0 compris la boucle permet de redmander tant que la condition n'est pas vérifiée*/ 
+        /*On demande de rentrer une valeur de lunchfood qui doit être compris entre le stock et 0 compris la boucle permet de redmander tant que la condition n'est pas vérifiée*/ 
         printf("Combien voulez vous donner de bottes de foin à %s? : ", nom_vache);
         scanf("%d", &lunchfood);
         while (lunchfood>stock || lunchfood<0){
