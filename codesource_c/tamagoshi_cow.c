@@ -10,13 +10,19 @@
 int fitness = 5;
 int stock = 5;
 
+void update() { printf("\033[H\033[J"); }
+
 void affiche_vache(int etat, int dureedevie, int stock, char *nom_vache){
-    /* On crée la vache de base qui "prend en paramètre" les yeux et la langue*/
-    char vache[1000] = "          ^ __ ^\n           (%s)\\_______\n           (__)\\       )\\/\\\n   O         %s ||----w |\n  \\|/          ||     ||             \\|/\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n";
+    /*On nettoie le terminal*/
+    update();
+
+    /*On initialise la vache*/
+    char vache[1000];
 
     /* On initialise la liste qui défini l'ordre dans lequel remplir les bottes de foins et la liste qui contient la chaine a afficher à l'endroit de chaque bottes ("  " si pas de botte et "##" si oui). */
     int ordre_bottes_de_foin[10] = {8, 9, 5, 7, 4, 2, 10, 6, 3, 1};
     char *bottes_de_foins[10];
+
     /* dépendamment du niveau du stock on "active" les bottes de foin correspondantes */
     for (int i = 0; i < 10; i++){
         if (stock>=i+1){
@@ -29,6 +35,7 @@ void affiche_vache(int etat, int dureedevie, int stock, char *nom_vache){
     /* On ajoute des espaces autour du nom pour pouvoir l'afficher correctement*/
     char nom_vache_formatte[100];
     int espaces_pour_nom = (11 - strlen(nom_vache)) / 2;
+    printf("%d\n", espaces_pour_nom);
     for (int i = 0; i < espaces_pour_nom; i++){
         nom_vache_formatte[i] = ' ';
     }
@@ -38,6 +45,7 @@ void affiche_vache(int etat, int dureedevie, int stock, char *nom_vache){
     for (int i = 0; i < espaces_pour_nom  +1; i++){
         strcat(nom_vache_formatte, " ");
     }
+    printf("%s\n", nom_vache_formatte);
 
 
     /* Dépendamment de l'état actuel on modifie le dessin de la vache puis on l'affiche*/
@@ -71,7 +79,7 @@ void affiche_vache(int etat, int dureedevie, int stock, char *nom_vache){
         printf(vache, bottes_de_foins[0], bottes_de_foins[1], bottes_de_foins[2], bottes_de_foins[3], bottes_de_foins[4], bottes_de_foins[5], bottes_de_foins[6], bottes_de_foins[7], bottes_de_foins[8], bottes_de_foins[9]);
         break;
     }
-    }
+}
 
 void stock_update(int lunchfood){
     /* On initialise le generateur de nombres aleatoires */
@@ -111,6 +119,9 @@ void fitness_update(int lunchfood){
 }
 
 int main(){
+    /*On nettoie le terminal*/
+    update();
+
     /*Initialisation de variable */
     int lunchfood;
     int dureedevie = 0;
