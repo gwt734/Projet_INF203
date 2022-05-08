@@ -1,5 +1,10 @@
 # Projet_INF203
 
+## Introduction
+
+Ce projet a pour but de nous aider à comprendre le bash ainsi que le C. Dans ce projet nous avon spour bit de coder de façon différente une vache. Et ce chemin nous ménera à programmer un tamagoshi dans lequel nous devrons penser à toutes les possibilités qu'il peut y avoir. 
+Cependant, ce projet est aussi la pour nous apprendre à comment bien réfléchir tout en s'amusant.
+
 ## 1 - Préliminaires
 
 ### Options :
@@ -25,7 +30,7 @@ Dans toute la partie bash, nos programmes commencent par ``` #!/bin/bash ``` pou
 
 ### cow_kindergarten
 
-```c
+```bash
 #!/bin/bash
 #boucle qui sera répétée 10 fois
 for i in {1..10}
@@ -42,8 +47,7 @@ cowsay -T "U " meuh
 Dans cette fonction, la vache prononce les chiffres de 1 a 10 avec une pause d’une seconde entre chaque chiffre. Elle tire la langue lorsque la boucle est terminée.
 
 Exemple d'éxécution :
-S
-```c
+```bash
  ___
 < 1 >
  ---
@@ -136,7 +140,7 @@ S
 
 ### cow_primaryschool
 
-```c
+```bash
 #!/bin/bash
 #boucle qui sera répétée n fois
 for i in $(eval echo {1..$1})
@@ -155,7 +159,7 @@ Lors de la réalisation de cette fonction, nous avons mis du temps à comprendre
 Exemple d'éxécution :
 arguments : 2
 
-```c
+```bash
  ___
 < 1 >
  ---
@@ -184,7 +188,7 @@ arguments : 2
 
 ### cow_highschool
 
-```c
+```bash
 #!/bin/bash
 #boucle répétée n fois 
 for i in $(eval echo {1..$1})
@@ -199,12 +203,12 @@ cowsay -T "U " meuh
 ```
 
 Cette vache pourra dire les carrés des chiffres ou nombres qui se trouvent entre 1 et n avec n qui sera donné en argument. 
-Lors de la réalisation de ce programme, nous ne comprenions pas pourquoi on ne pouvait pas juste marqué ```cowsay $i*$i```. Nous avons ensuite vu dans le cours que lorsque nous voulions faire des opérations sur des valeurs de variables, nous devons mettre ```$(expr )``` et que nous devions aussi mettre un ```\``` devant le ```*``` pour qu'il soit pris pour un opérateur. 
+Lors de la réalisation de ce programme, nous ne comprenions pas pourquoi on ne pouvait pas juste marqué ```cowsay $i*$i```. Nous avons ensuite vu dans le cours que lorsque nous voulions faire des opérations sur des valeurs de variables, nous devons mettre ```$(expr )``` et que nous devions aussi mettre un ```\``` devant le ```*``` pour qu'il soit pris comme un opérateur. 
 
 Exemple d'éxécution :
 argument : 3
 
-```c
+```bash
  ___
 < 1 >
  ---
@@ -243,7 +247,7 @@ argument : 3
 
 La suites de Fibonacci est une suite de nombre tel que ses deux premiers termes sont 0 et 1, et ensuite, chaque terme successif est la somme des deux termes précédents. Ainsi 0+1=1, 1+1=2, 1+2=3, 2+3=5, 3+5=8, etc.
 
-```c
+```bash
 #!/bin/bash
 #initialisation des deux premier termes
 u0=0
@@ -269,7 +273,7 @@ done
 cowsay -T "U " meuh
 ```
 
-Dans notre programme, nous avons d'abord initialisé les deux premiers termes à 0 et 1. Ensuite nous affichons le premier terme qui est zéro. Cependant, on peut remarquer que l'on affiche zéro en lettre et ce n'est pas la valeur de u0 car lorsque nous mettions cela, le programme affichait zéro et ne continuait pas la suite. Nous avons donc trouvé cette alternative. Ensuite nous affichons la valeur de u1 puis nous changeons les valeurs, c'est-à-dire que notre u2 aura comme valeur 0 et u1 restera à 1. Puis nous initialisons u à la valeur de u1+u2 et nous échangeons dans la boucle jusqu'à tomber sur le nombre donné en argument.
+Dans notre programme, nous avons d'abord initialisé les deux premiers termes à 0 et 1. Ensuite nous affichons le premier terme qui est zéro. Cependant, on peut remarquer que l'on affiche zéro en lettre et ce n'est pas la valeur de u0 car lorsque nous mettions cela, le programme affichait zéro et ne continuait pas la suite du programme. Nous avons donc trouvé cette alternative. Ensuite nous affichons la valeur de u1 puis nous changeons les valeurs, c'est-à-dire que notre u2 aura comme valeur 0 et u1 restera à 1. Puis nous initialisons u à la valeur de u1+u2 et nous échangeons dans la boucle jusqu'à tomber sur le nombre donné en argument.
 
 Exemple d'éxécution :
 argument : 5
@@ -335,7 +339,7 @@ argument : 5
 
 ### cow_university
 
-```c
+```bash
 #!/bin/bash
 j=1
 #prononce le premier nombre premier
@@ -369,7 +373,7 @@ cowsay -T "U " meuh
 ```
 
 Dans ce programme nous avons d'abord affiché la valeur du 2 car c'est un nombre premier cependant elle ne s'affiche pas avec les boucles que nous avaons faites car elle ne respecte pas les conditions. 
-Ensuite, nous commencé une boucle pour que le prgramme s'arrête à la valeur demandé c'est-à-dire que le programme doit s'arrêter avant que la valeur en argument soit dépassée. Ensuite grâce à plusieurs conditions, on vérifie ou non si le chiffre est un nomre premier et si oui on l'affiche. 
+Ensuite, nous avons commencé une boucle pour que le programme s'arrête à la valeur demandé c'est-à-dire que le programme doit s'arrêter avant que la valeur en argument soit dépassée. Ensuite grâce à plusieurs conditions, on vérifie ou non si le chiffre est un nomre premier et si oui on l'affiche. 
 
 Exemple d'éxécution :
 argument : 4
@@ -404,7 +408,7 @@ argument : 4
 
 ### smart_cow 
 
-```c
+```bash
 #!/bin/bash
 #on decoupe chaque partie de l agument pour récuperer les deux chiffres et l opérateur
 n1=$(echo $1 | cut -c1 )
@@ -435,7 +439,7 @@ sleep 1
 cowsay -T \U meuh
 ```
 
-Dans ce programme, nous récupérons d'abord le premier caractère qui sera la premier chiffre, le deuwième qui sera l'opérateur et le troisième qui sera le deuxième chiffre. Ensuite selon la valeur de l'opérateur on effectue le calcul et on met le résultat dasn les yeux de la vache.
+Dans ce programme, nous récupérons d'abord le premier caractère qui sera la premier chiffre, le deuxième qui sera l'opérateur et le troisième qui sera le deuxième chiffre. Ensuite selon la valeur de l'opérateur on effectue le calcul et on met le résultat dans les yeux de la vache.
 
 Exemple d'éxécution :
 argument : 2+3
@@ -463,7 +467,7 @@ argument : 2+3
 
 Pour cette vache là, on a décidé de se pencher sur la suite de conway. C'est une suite où le terme suivant est une "description" du terme précédent. Le terme suivant est construit avec le n'ombre d'occurences de chaque chiffre suivi du chiffre lui même.
 Par exemple 1211 donnera 111221 car il y a d'abord 1 1, puis 1 2 et ensuite 2 1.
-On a tout d'abord essayer de compter le nombre d'occurences totil y en a au moins unales de chaque chiffre et de former le terme suivant en ajoutant (quand il y en a au moins un)de chaque chiffre (1,2 ou 3 car aucun autre ne peut exister pour une graine(un premier terme) de 1) accolé a son nombre d'occurence.
+On a tout d'abord essayer de compter le nombre d'occurences total ou il y en a au moins un de chaque chiffre et de former le terme suivant en ajoutant (quand il y en a au moins un)de chaque chiffre (1,2 ou 3 car aucun autre ne peut exister pour une graine(un premier terme) de 1) accolé a son nombre d'occurence.
 Voici le code de cette version :
 
 ```bash
@@ -486,7 +490,7 @@ do
     u_tmp=$u
     while [ $u -gt 0 ]
     do
-        calcul du nombre de 1
+        #calcul du nombre de 1
         if [ $(($u%10)) -eq 1 ]
         then
             nb_de_1=$(($nb_de_1+1))
@@ -524,7 +528,7 @@ do
 done
 ```
 
-Ceci semblait fonctionner mais au vu de l'exemple, on remarque que ça n'est pas exact car il faut en réalité compter les occurences d'un chiffre à la suite. Le programme nous donnait 1231 comme terme suivant à 1211 On a donc modifié le programme et après quelque modification notamment pour permettre d'ajouter comme argument le premier terme et le nombre de termes à afficher, Voici le code obtenu :
+Ceci semblait fonctionner mais au vu de l'exemple, on remarque que ça n'est pas exact car il faut en réalité compter les occurences d'un chiffre à la suite. Le programme nous donnait 1231 comme terme suivant à 1211 On a donc modifié le programme et après quelque modification notamment pour permettre d'ajouter comme argument le premier terme et le nombre de termes à afficher, voici le code obtenu :
 
 ```bash
 #!/bin/bash
@@ -578,6 +582,42 @@ do
 done
 #vache tire la langue
 cowsay -T "U " meuh
+```
+Exemple d'éxécution :
+arguments : 12 2
+```bash
+ ____
+< 12 >
+ ----
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ______
+< 1112 >
+ ------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ______
+< 3112 >
+ ------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ______
+< meuh >
+ ------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+             U  ||----w |
+                ||     ||
 ```
 
 ## 3 - C
@@ -663,7 +703,7 @@ void affiche_vache(int argc, char *argv[]){
 }
 ```
 Dans cette fonction, nous avons décidé que l'utilisateur pouvait changer les yeux et la langue de la vache en entrant en argument "-e" pour changer les yeux avec un deuxième argument pour remplacer les yeux ou "-T" pour la langue avec aussi un deuxième argument pour la remplacer. 
-Nous avons également décidé de faire en sorte qu'elle puisse parler. Pour cela nous avons du nous même créer la bulle dans lequel le message qu'elle dira apparaitra. Ce message est d'ailleurs l'argument qui sera rentré par l'utilisateur.
+Nous avons également décidé de faire en sorte qu'elle puisse parler. Pour cela nous avons du nous même créer la bulle dans laquelle le message qu'elle dira apparaitra. Ce message est d'ailleurs l'argument qui sera rentré par l'utilisateur.
 Nous pouvons ensuite la faire danser en suivant la même syntaxe pour les arguments mais en mettant -danse et le nombre de fois qu'elle fera la danse. 
 
 1.1 Exemples d'éxécution : 
@@ -781,7 +821,8 @@ arguments : -danse 2
 ```
 
 
-1. Fonction update et goto :
+
+2. Fonction update et goto :
 
 La fonction update permet d'effacer le terminal durant l'éxécution du programme.
 
@@ -827,7 +868,7 @@ Dans cette fonction, nous n'avons pas utilisé la fonction goto(x,y) car au déb
                ||     ||
 ```
 Cependant ce n'est pas vraiment cette affichage que l'on a car on ne voit à l'écran qu'une seule d'entre elle.
-Or nous avons mis l'exemple comme cela pour bine comprendre le fonctionnement de notre programme.
+Or nous avons mis l'exemple comme cela pour bien comprendre le fonctionnement de notre programme.
 
 ### readingcow
 
@@ -902,7 +943,7 @@ void affiche_vache(int argc, char *argv[]){
 void update() { printf("\033[H\033[J"); }
 void gotoxy(x, y) { printf(" \033[%d;%dH", x, y); }
 ```
-Nous avons utilisé la même fonction affiche que précédemment car nous utilisons certaines options comme le changement de langue ou encore l'otpion -parle. 
+Nous avons utilisé la même fonction affiche que précédemment car nous utilisons certaines options comme le changement de langue ou encore l'option -parle. 
 
 2. Fonction main : 
 ```c
@@ -934,7 +975,7 @@ int main(int argc,char *argv[]){
     affiche_vache(2, argw);
 }
 ```
-Cette fonction, permettre à la vache de manger un mot ou un texte caractère par caractère et de le faire apparaitre dans la bulle au dessus de sa tête. Nous avons donc décidé de nous aider de notre fonction affiche_vache pour que cela soit plus simple et plus rapide à coder. 
+Cette fonction, permet à la vache de manger un mot ou un texte caractère par caractère et de le faire apparaitre dans la bulle au dessus de sa tête. Nous avons donc décidé de nous aider de notre fonction affiche_vache pour que cela soit plus simple et plus rapide à coder. 
 
 2.1 Exemple d'éxécution : 
 ```c
@@ -971,7 +1012,7 @@ Cette fonction, permettre à la vache de manger un mot ou un texte caractère pa
                ||----w |
                ||     ||
 ```
-Une nouvelle fois, lors de l'éxécution du programme, nous avons qu'une seule de ses vaches qui est affichée sur le terminal.
+Une nouvelle fois, lors de l'éxécution du programme, nous n'avons qu'une seule de ses vaches qui est affichée sur le terminal.
 
 
 ## 4 - Automates
@@ -1180,32 +1221,13 @@ Un exemple d'éxécution ci-dessous est donné où l'on peut observer que notre 
 
 4.1 Exemple d'éxécution :
 ```c
-           ^ __ ^
-            (OO)
-           ~(o_)\
-           \\//  \
-            ~  \  \/\/
-                ||
-                ||
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-stock : 5
-lunchfood? : 2
-______________________________________________________________________________________________
+Comment voulez-vous nommer votre vache ? Dottie
+```
+![Image2exec](images/Exec1.png)
+![Image3exec](images/Exec2.png)
+![Image4exec](images/Exec3.png)
 
-          ^ __ ^
-           (--)\_______
-           (__)\       )\/\
-   O           ||----w |
-  \|/          ||     ||             \|/
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-stock : 7
-lunchfood? : 7
-______________________________________________________________________________________________
+Nous n'avons pas mis toutes les éxécutions du jeu car 12 jours aurai était long.
 
- _____________
- |    RIP    | - __ -_______
- |   Vache   |  (XX)_\       )\/\
- |  02 jours |  (__)==\----w/===
-^^^^^^^^^^^^^^^^^^U^^^^^^^^^^^^^^^^
-``` 
-
+## Conclusion
+Ce projet nous a permis de nous familiariser avec le bash et le C. Certaines erreurs faites au début nous ont permis de réfléchir diféremment et d'aller au plus simple dans nos programmes. Nous avons également réussi à surmonter les difficultés que nous avons pu rencontrer.
