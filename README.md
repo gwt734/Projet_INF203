@@ -1,5 +1,7 @@
 # Projet_INF203
 
+Lien github : https://github.com/gwt734/Projet_INF203
+
 ## Introduction
 
 Ce projet a pour but de nous aider à comprendre le bash ainsi que le C. Dans ce projet nous avon spour bit de coder de façon différente une vache. Et ce chemin nous ménera à programmer un tamagoshi dans lequel nous devrons penser à toutes les possibilités qu'il peut y avoir. 
