@@ -1225,9 +1225,10 @@ Comment voulez-vous nommer votre vache ? Dottie
 ```
 ![Image2exec](images/Exec1.png)
 ![Image3exec](images/Exec2.png)
-![Image4exec](images/Exec3.png)
+![Image4exec](images/Exec4.png)
 
-Nous n'avons pas mis toutes les éxécutions du jeu car 12 jours aurai était long.
+Nous n'avons pas mis toutes les éxécutions du jeu car 9 jours aurai était long.
 
 ## Conclusion
+
 Ce projet nous a permis de nous familiariser avec le bash et le C. Certaines erreurs faites au début nous ont permis de réfléchir diféremment et d'aller au plus simple dans nos programmes. Nous avons également réussi à surmonter les difficultés que nous avons pu rencontrer.
